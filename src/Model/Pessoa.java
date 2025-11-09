@@ -7,4 +7,6 @@ public abstract class Pessoa {
     private String cpf;
     private LocalDateTime dataDeNascimento;
     private String email;
+
+
 }
