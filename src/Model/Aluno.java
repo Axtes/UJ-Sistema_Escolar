@@ -1,6 +1,8 @@
 package Model;
 
-public class Aluno extends Pessoa {
+import Control.Usuario;
+
+public class Aluno extends Usuario {
     private Long matricula;
     private Nota nota;
     private Curso curso;

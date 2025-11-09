@@ -1,8 +1,10 @@
 package Model;
 
+import Control.Usuario;
+
 import java.util.List;
 
-public class Professor extends Pessoa {
+public class Professor extends Usuario {
     private Long matricula;
     private Titulacao titulacao;
     private List<Disciplina> disciplinas;
