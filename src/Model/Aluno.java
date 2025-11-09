@@ -5,8 +5,8 @@ public class Aluno extends Pessoa {
     private Nota nota;
     private Curso curso;
     private Integer semestre;
-    private StatusDeConclusao status;
 
+    
     public Long getMatricula() {
         return matricula;
     }
@@ -14,7 +14,8 @@ public class Aluno extends Pessoa {
     public void setMatricula(Long matricula) {
         this.matricula = matricula;
     }
-
+    
+    
     public Nota getNota() {
         return nota;
     }
@@ -23,6 +24,7 @@ public class Aluno extends Pessoa {
         this.nota = nota;
     }
 
+    
     public Curso getCurso() {
         return curso;
     }
@@ -31,6 +33,7 @@ public class Aluno extends Pessoa {
         this.curso = curso;
     }
 
+    
     public Integer getSemestre() {
         return semestre;
     }
@@ -39,11 +42,5 @@ public class Aluno extends Pessoa {
         this.semestre = semestre;
     }
 
-    public StatusDeConclusao getStatus() {
-        return status;
-    }
 
-    public void setStatus(StatusDeConclusao status) {
-        this.status = status;
-    }
 }

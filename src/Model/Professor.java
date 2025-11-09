@@ -7,7 +7,6 @@ public class Professor extends Pessoa {
     private Titulacao titulacao;
     private List<Disciplina> disciplinas;
     private List<Turma> turmas;
-    private List<Curso> cursos;
 
     public Long getMatricula() {
         return matricula;
@@ -16,7 +15,7 @@ public class Professor extends Pessoa {
     public void setMatricula(Long matricula) {
         this.matricula = matricula;
     }
-
+    
     public Titulacao getTitulacao() {
         return titulacao;
     }
@@ -24,7 +23,7 @@ public class Professor extends Pessoa {
     public void setTitulacao(Titulacao titulacao) {
         this.titulacao = titulacao;
     }
-
+    
     public List<Disciplina> getDisciplinas() {
         return disciplinas;
     }
@@ -40,12 +39,6 @@ public class Professor extends Pessoa {
     public void setTurmas(List<Turma> turmas) {
         this.turmas = turmas;
     }
+    
 
-    public List<Curso> getCursos() {
-        return cursos;
-    }
-
-    public void setCursos(List<Curso> cursos) {
-        this.cursos = cursos;
-    }
 }
