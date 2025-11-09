@@ -1,4 +1,4 @@
 package Model;
 
-public class Horario {
+public interface Horario {
 }
