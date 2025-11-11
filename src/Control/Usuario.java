@@ -1,61 +1,35 @@
 package Control;
 
-import Model.Aluno;
-import Model.Professor;
 import Model.TipoUsuario;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class Usuario {
+public abstract class Usuario {
     private Long id;
+    private static Long autoId = 1L;
     private String nome;
     private String senha;
     private TipoUsuario tipoUsuario;
     private String cpf;
-    private LocalDateTime dataDeNascimento;
+    private LocalDate dataDeNascimento;
     private String email;
     private Scanner leitor = new Scanner(System.in);
 
-    public void cadastrarUsuario(Usuario usuario, Aluno aluno, Professor professor) {
-        System.out.println("Por favor Digite o seu nome");
-        nome = leitor.nextLine();
-        usuario.setNome(nome);
-
-        System.out.println("Por favor Digite a sua senha");
-        senha = leitor.nextLine();
-        usuario.setSenha(senha);
-
-        System.out.print("Digite a sua data de nascimento no formato(dd/MM/yyyy): ");
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String dataDeNascimentoStr = leitor.next();
-        dataDeNascimento = LocalDateTime.parse(dataDeNascimentoStr, formato);
-        usuario.setDataDeNascimento(dataDeNascimento);
-
-        System.out.println("Digite o seu CPF somente com números!");
-        cpf = leitor.nextLine();
-        usuario.setCpf(cpf);
-
-        System.out.println("Digite o seu email!");
-        email = leitor.nextLine();
-        usuario.setEmail(email);
-
-        System.out.println("Por fim, qual tipo de usuário você é? Digite 'p' para Professor e 'a' para Aluno!");
-        String tipoUsuario;
-        tipoUsuario = leitor.nextLine();
-
-        if (tipoUsuario.equalsIgnoreCase("P")) {
-            usuario.setTipoUsuario(TipoUsuario.PROFESSOR);
-        } else if (tipoUsuario.equalsIgnoreCase("A")) {
-            usuario.setTipoUsuario(TipoUsuario.ALUNO);
-        }
-
-        System.out.println("Cadastrado Realizado com Sucesso!!");
+    public Usuario() {
+        setId(autoId++);
     }
 
-    public void logarNoSistema(String nome, String senha, String email){
+    public void manterDados(Usuario novoUsuario) {
+        novoUsuario.setNome(getNome());
+        novoUsuario.setSenha(getSenha());
+        novoUsuario.setTipoUsuario(getTipoUsuario());
+        novoUsuario.setCpf(getCpf());
+        novoUsuario.setDataDeNascimento(getDataDeNascimento());
+        novoUsuario.setEmail(getEmail());
+    }
+
+    public void logarNoSistema(){
         System.out.println("Por favor insira seu email");
         senha = leitor.nextLine();
         System.out.println("Por favor insira sua senha");
@@ -108,11 +82,11 @@ public class Usuario {
         this.cpf = cpf;
     }
 
-    public LocalDateTime getDataDeNascimento() {
+    public LocalDate getDataDeNascimento() {
         return dataDeNascimento;
     }
 
-    public void setDataDeNascimento(LocalDateTime dataDeNascimento) {
+    public void setDataDeNascimento(LocalDate dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
     }
 

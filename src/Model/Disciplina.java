@@ -1,8 +1,10 @@
 package Model;
 
 public class Disciplina {
+    private Long id;
+    private static Long autoId;
     private String nome;
-    private Integer codDisciplina;
+    private String codDisciplina;
     private StatusDeConclusao statusDeConclusao;
 
     public String getNome() {
@@ -13,11 +15,11 @@ public class Disciplina {
         this.nome = nome;
     }
 
-    public Integer getcodDisciplina() {
+    public String getcodDisciplina() {
         return codDisciplina;
     }
 
-    public void setcodDisciplina(Integer codDisciplina) {
+    public void setcodDisciplina(String codDisciplina) {
         this.codDisciplina = codDisciplina;
     }
 

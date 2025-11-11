@@ -2,11 +2,18 @@ package Model;
 
 import Control.Usuario;
 
+import java.time.LocalDate;
+
 public class Aluno extends Usuario {
     private Long matricula;
     private Nota nota;
     private Curso curso;
     private Integer semestre;
+
+    public void gerarMatricula() {
+        LocalDate anoAtual = LocalDate.now();
+        matricula = anoAtual.getYear() + getId();
+    }
 
     
     public Long getMatricula() {

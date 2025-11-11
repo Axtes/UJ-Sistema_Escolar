@@ -1,12 +1,39 @@
 package Model;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Curso {
+    private Long id;
+    private static Long autoId = 1L;
     private String nome;
     private List<Professor> professores;
     private List<Aluno> alunos;
     private String codigoCurso;
+    private Scanner leitor = new Scanner(System.in);
+
+    public Curso() {
+        setId(autoId++);
+    }
+
+    public void gerarCodigo() {
+        String iniciais = "";
+        String[] espacos = getNome().split(" ");
+        for (String letras : espacos) {
+            if (!letras.isEmpty()) {
+                iniciais += letras.charAt(0);
+            }
+        }
+        codigoCurso = iniciais + "000" + getId();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
