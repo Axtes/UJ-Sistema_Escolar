@@ -1,8 +1,8 @@
 package Model;
 
 public enum TipoUsuario {
-    ADMINISTRADOR("Administrador(A)"),
-    PROFESSOR("Professor(A)"),
+    ADMINISTRADOR("Administrador(a)"),
+    PROFESSOR("Professor(a)"),
     ALUNO("Aluno(a)");
 
     private final String tipo;

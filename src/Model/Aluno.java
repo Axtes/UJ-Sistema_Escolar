@@ -1,26 +1,24 @@
 package Model;
 
-import Control.Usuario;
-
 import java.time.LocalDate;
 
 public class Aluno extends Usuario {
-    private Long matricula;
+    private String matricula;
     private Nota nota;
     private Curso curso;
     private Integer semestre;
+    private Turma turma;
 
     public void gerarMatricula() {
         LocalDate anoAtual = LocalDate.now();
-        matricula = anoAtual.getYear() + getId();
+        matricula = "" + anoAtual.getYear()+getId();
     }
-
     
-    public Long getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(Long matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
     
@@ -51,5 +49,19 @@ public class Aluno extends Usuario {
         this.semestre = semestre;
     }
 
+    public Turma getTurma() {
+        return turma;
+    }
 
+    public void setTurma(Turma turma) {
+        this.turma = turma;
+    }
+
+    @Override
+    public String toString() {
+        return """
+                %s
+                Nome: %s | Curso: %s | Matrícula: %s
+                """.formatted(getTipoUsuario(), getNome(), getCurso().getNome(), getMatricula());
+    }
 }

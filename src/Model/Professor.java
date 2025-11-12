@@ -1,20 +1,26 @@
 package Model;
 
-import Control.Usuario;
-
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Professor extends Usuario {
-    private Long matricula;
+    private String matricula;
     private Titulacao titulacao;
-    private List<Disciplina> disciplinas;
-    private List<Turma> turmas;
+    private List<Disciplina> disciplinas = new ArrayList<>();
+    private List<Turma> turmas = new ArrayList<>();
+    private List<Curso> cursos = new ArrayList<>();
 
-    public Long getMatricula() {
+    public void gerarMatricula() {
+        LocalDate anoAtual = LocalDate.now();
+        matricula = "" + anoAtual.getYear() + getId();
+    }
+
+    public String getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(Long matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
     
@@ -41,6 +47,20 @@ public class Professor extends Usuario {
     public void setTurmas(List<Turma> turmas) {
         this.turmas = turmas;
     }
-    
 
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }
+
+    @Override
+    public String toString() {
+        return """
+                %s
+                Nome: %s | Título: %s | Matrícula: %s
+                """.formatted(getTipoUsuario(), getNome(), getTitulacao(), getMatricula());
+    }
 }

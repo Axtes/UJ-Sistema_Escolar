@@ -1,24 +1,17 @@
-package Viewer;
+import Viewer.Menus;
 
-import Control.Gerenciar;
-
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AppUJ {
     public static void main(String[] args) {
-//        Usuario usuario = new Usuario();
-//
-//        usuario.cadastrarUsuario();
-        Gerenciar gerenciar = new Gerenciar();
         int opcao = 0;
         Scanner leitor = new Scanner(System.in);
+        Menus menus = new Menus();
 
         do {
-            boolean entradaValida = false;
-
-            while (!entradaValida) {
                 try {
-                    System.out.println("""
+                System.out.println("""
                 ****************************************
                 *                                      *
                 * 1 - Cadastrar                        *
@@ -30,17 +23,21 @@ public class AppUJ {
                 """);
 
                     opcao = leitor.nextInt();
-                    entradaValida = true;
+                    leitor.nextLine();
 
-                } catch (NumberFormatException e) {
+                } catch (InputMismatchException e) {
                     System.out.println("Erro! Por favor, digite apenas números inteiros entre 1 e 3");
+                    leitor.nextLine();
                 }
-            }
 
             switch (opcao) {
-                case 1 -> gerenciar.cadastrarUsuario();
+                case 1 -> menus.menuCadastro();
+                case 2 -> menus.menuListagem();
+                case 3 -> System.out.println("Encerrando a aplicação...");
+                default -> System.out.println("Entrada Inválida! Por favor, digite apenas números inteiros entre 1 e 3");
             }
 
-        }while (opcao != 9);
+        }while (opcao != 3);
+        leitor.close();
     }
 }

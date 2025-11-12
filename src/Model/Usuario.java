@@ -1,11 +1,9 @@
-package Control;
-
-import Model.TipoUsuario;
+package Model;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public abstract class Usuario {
+public class Usuario {
     private Long id;
     private static Long autoId = 1L;
     private String nome;
@@ -17,7 +15,7 @@ public abstract class Usuario {
     private Scanner leitor = new Scanner(System.in);
 
     public Usuario() {
-        setId(autoId++);
+        id = autoId++;
     }
 
     public void manterDados(Usuario novoUsuario) {
@@ -38,7 +36,7 @@ public abstract class Usuario {
         if (getEmail().equals(email) && getSenha().equals(senha)) {
             System.out.println("Logado no sistema!");
         } else {
-            System.out.println("Credencias inválidas, por-favor tente novamente!");
+            System.out.println("Credenciais inválidas, por-favor tente novamente!");
         }
     }
 

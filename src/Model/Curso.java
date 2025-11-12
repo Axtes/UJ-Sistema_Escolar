@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,13 +8,15 @@ public class Curso {
     private Long id;
     private static Long autoId = 1L;
     private String nome;
-    private List<Professor> professores;
-    private List<Aluno> alunos;
+    private List<Professor> professores = new ArrayList<>();
+    private List<Aluno> alunos = new ArrayList<>();
+    private List<Turma> turmas = new ArrayList<>();
+    private List<Disciplina> disciplinas = new ArrayList<>();
     private String codigoCurso;
-    private Scanner leitor = new Scanner(System.in);
+    private Integer semestre;
 
     public Curso() {
-        setId(autoId++);
+        this.id = autoId++;
     }
 
     public void gerarCodigo() {
@@ -24,7 +27,7 @@ public class Curso {
                 iniciais += letras.charAt(0);
             }
         }
-        codigoCurso = iniciais + "000" + getId();
+        codigoCurso = iniciais.toUpperCase() + String.format("%03d",getId());
     }
 
     public Long getId() {
@@ -65,5 +68,37 @@ public class Curso {
 
     public void setCodigoCurso(String codigoCurso) {
         this.codigoCurso = codigoCurso;
+    }
+
+    public Integer getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(Integer semestre) {
+        this.semestre = semestre;
+    }
+
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
+    }
+
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
+    }
+
+    @Override
+    public String toString() {
+        return """
+                Curso | Semestres | Código do Curso
+                %s      %d          %s
+                """.formatted(getNome(), getSemestre(), getCodigoCurso());
     }
 }
