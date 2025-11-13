@@ -83,17 +83,20 @@ public class Gerenciar {
 
                 System.out.println("E ele será professor(a) de quais cursos? Digite o código do curso para adicionar ou 'sair' para encerrar)");
                 cursos.forEach(System.out::println);
-                leitor.nextLine();
 
                 do {
                     termoBusca = leitor.nextLine();
                     for (Curso c : cursos) {
                         if (termoBusca.isBlank() || termoBusca.matches("\\d+")) {
                             System.out.println("Entrada inválida! Por-favor, digite corretamente o código do curso!");
+                            termoBusca = leitor.nextLine();
                         } else if (c.getCodigoCurso().equalsIgnoreCase(termoBusca)) {
                             professor.getCursos().add(c);
                             turma.gerarCodigoTurma();
                             professor.getTurmas().add(turma);
+                            System.out.println("Adicionado ao curso!");
+                            System.out.println("E ele será de mais algum curso?(Digite 'Sair' para terminar!): ");
+                            cursos.forEach(System.out::println);
                         }
                     }
                 } while (!termoBusca.equalsIgnoreCase("sair"));
@@ -193,6 +196,9 @@ public class Gerenciar {
                             } else {
                                 disciplina.setSemestre(semestre);
                                 entradaValida = true;
+                                System.out.println("Adicionado ao curso!");
+                                System.out.println("E ela será de mais algum curso?(Digite 'Sair' para terminar!): ");
+                                cursos.forEach(System.out::println);
                             }
                         }
                     }
@@ -204,22 +210,42 @@ public class Gerenciar {
     }
 
     public void listarProfessores() {
-        professores.forEach(System.out::println);
+        if(professores.isEmpty()) {
+            System.out.println("A lista de professores está vazia, por-favor cadastre um novo para ser listado!");
+        } else {
+            professores.forEach(System.out::println);
+        }
     }
 
     public void listarAlunos(){
-        alunos.forEach(System.out::println);
+        if(alunos.isEmpty()) {
+            System.out.println("A lista de alunos está vazia, por-favor cadastre um novo para ser listado!");
+        } else {
+            alunos.forEach(System.out::println);
+        }
     }
 
     public void listarDisciplinas(){
-        disciplinas.forEach(System.out::println);
+        if(disciplinas.isEmpty()) {
+            System.out.println("A lista de disciplinas está vazia, por-favor cadastre um novo para ser listado!");
+        } else {
+            disciplinas.forEach(System.out::println);
+        }
     }
 
     public void listarCursos(){
-        cursos.forEach(System.out::println);
+        if (cursos.isEmpty()) {
+            System.out.println("A lista de cursos está vazia, por-favor cadastre um novo para ser listado!");
+        } else {
+            cursos.forEach(System.out::println);
+        }
     }
 
     public void listarTurmas(){
-        turmas.forEach(System.out::println);
+        if (turmas.isEmpty()) {
+            System.out.println("A lista de turmas está vazia, por-favor cadastre um novo para ser listado!");
+        } else {
+            turmas.forEach(System.out::println);
+        }
     }
 }
