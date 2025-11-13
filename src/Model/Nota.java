@@ -136,12 +136,12 @@ public class Nota {
             }
 
             if (rec == null) {
-                return "Em recuperação (média " + String.format("%.1f", media) + ")";
+                return "Em recuperação (média " + String.format("%.1f", media) + ")/n";
             } else {
                 if (rec >= 5.0) {
-                    return "Aprovado na recuperação (nota " + String.format("%.1f", rec) + ")";
+                    return "Aprovado na recuperação (nota " + String.format("%.1f", rec) + ")/n";
                 } else {
-                    return "Reprovado na recuperação (nota " + String.format("%.1f", rec) + ")";
+                    return "Reprovado na recuperação (nota " + String.format("%.1f", rec) + ")/n";
                 }
             }
         }

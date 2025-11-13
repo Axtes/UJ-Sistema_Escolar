@@ -253,7 +253,7 @@ public void lancarNotas() {
     Scanner scanner = new Scanner(System.in);
     Nota notaControl = new Nota();
 
-    System.out.println("=== LANÇAMENTO DE NOTAS ===");
+    System.out.println("*** LANÇAMENTO DE NOTAS ***");
 
     System.out.print("Digite o nome do aluno: ");
     String nomeAluno = scanner.nextLine();
@@ -281,7 +281,7 @@ public void lancarNotas() {
         System.out.println("Aluno ou disciplina não definidos!");
         return;
     }
-    
+
     List<Double> notas = new ArrayList<>();
     for (int i = 1; i <= 3; i++) {
         System.out.print("Nota " + i + ": ");
