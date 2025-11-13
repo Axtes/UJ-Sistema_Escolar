@@ -1,9 +1,12 @@
 package Model;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-public class Disciplina {
+public class Disciplina implements Horario {
     private Long id;
     private static Long autoId = 1L;
     private String nome;
@@ -12,6 +15,7 @@ public class Disciplina {
     private StatusDeConclusao statusDeConclusao;
     private Curso curso = new Curso();
     private List<Curso> cursos = new ArrayList<>();
+    private LocalTime horario;
 
     public Disciplina() {
         this.id = autoId++;
@@ -85,10 +89,49 @@ public class Disciplina {
         this.cursos = cursos;
     }
 
+    public LocalTime getHorario() {
+        return horario;
+    }
+
+    public void setHorario(LocalTime horario) {
+        this.horario = horario;
+    }
+
     @Override
     public String toString() {
         return """
-                Nome da disciplina: %s | Código da disciplina: %s
-                """.formatted(getNome(), getCodDisciplina());
+                Nome da disciplina: %s | Código da disciplina: %s | Horário: %s
+                """.formatted(getNome(), getCodDisciplina(), getHorario());
+    }
+
+    @Override
+    public LocalTime adicionarHorario() {
+        Scanner leitor = new Scanner(System.in);
+        String horario = "";
+
+        boolean entradaValida = false;
+        while (!entradaValida) {
+            try {
+                System.out.println("Qual o horário dessa disciplina?(Formato: 0000 -> 00:00): ");
+                horario = leitor.nextLine();
+                if (horario.matches("^\\d{3,4}$")) {
+                    if (horario.length() == 3) {
+                        horario = "0" + horario;
+                    }
+                    horario = horario.substring(0, 2) + ":" + horario.substring(2);
+                } else {
+                    System.out.println("Horário digitado inválido, por-favor digite o horário corretamente!(Formato: 0000 -> 00:00)");
+                    horario = leitor.nextLine();
+                }
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("Caracteres inválidos, digite novamente por-favor");
+            }
+            entradaValida = true;
+        }
+        DateTimeFormatter horarioFormato = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime horarioAdicionado;
+        horarioAdicionado = LocalTime.parse(horario, horarioFormato);
+        setHorario(horarioAdicionado);
+        return getHorario();
     }
 }
