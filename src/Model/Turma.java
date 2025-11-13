@@ -77,7 +77,10 @@ public class Turma {
     @Override
     public String toString() {
         return """
-                Turma: %s | Curso: %s | Semestre: %d | Quantidade de Alunos: %d
-                """.formatted(getCodTurma(), getCurso(), getSemestre(), getQuantidadeAlunos());
+                Turma: %s
+                Curso: %s
+                Semestre: %d
+                Quantidade de Alunos: %d
+                """.formatted(getCodTurma(), getCurso().getCodigoCurso(), getSemestre(), getQuantidadeAlunos());
     }
 }

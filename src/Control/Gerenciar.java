@@ -121,6 +121,7 @@ public class Gerenciar {
                         if (turma.getAlunos().size() <= turma.getQtdAlunosMax()) {
                             c.getTurmas().add(turma);
                             turma.getAlunos().add(aluno);
+                            turma.setCurso(c);
                             aluno.setTurma(turma);
                             alunos.add(aluno);
                             turmas.add(turma);
@@ -135,7 +136,6 @@ public class Gerenciar {
                     }
                 }
             }
-
             System.out.println("Cadastrado Realizado com Sucesso!!");
         }
     }
