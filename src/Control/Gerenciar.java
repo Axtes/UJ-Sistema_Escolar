@@ -255,7 +255,7 @@ public class Gerenciar {
         return;
     }
 
-    System.out.println("=== LANÇAMENTO DE NOTAS ===");
+    System.out.println("LANÇAMENTO DE NOTAS");
     listarAlunos();
     System.out.print("Digite o nome do aluno: ");
     String nomeAluno = leitor.nextLine();
@@ -290,16 +290,16 @@ public class Gerenciar {
         return;
     }
 
-    // Cria ou usa o objeto Nota
     Nota nota = new Nota(alunoSelecionado, disciplinaSelecionada);
 
     System.out.println("Digite as notas das 3 avaliações:");
     for (int i = 0; i < 3; i++) {
         System.out.print("Nota " + (i + 1) + ": ");
         double n = leitor.nextDouble();
-        Nota.setNota(i, n);
+        Nota nota2 = new Nota();
+        nota2.setNota(i, n);
     }
-    leitor.nextLine(); // limpa o buffer
+    leitor.nextLine();
 
     nota.calcularMedia(disciplinaSelecionada, alunoSelecionado);
     System.out.println("Média inicial: " + nota.getMedia());
@@ -308,12 +308,9 @@ public class Gerenciar {
     System.out.println("Situação final de " + alunoSelecionado.getNome() + ": " + nota.getSituacao());
 }
 
-
-
-
     public void exibirNotasESituacoes(Nota sistemaNotas) {
     if (alunos.isEmpty() || disciplinas.isEmpty()) {
-        System.out.println("⚠️ Não há alunos ou disciplinas cadastrados!");
+        System.out.println("Não há alunos ou disciplinas cadastrados!");
         return;
     }
 

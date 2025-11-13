@@ -9,14 +9,52 @@ public class Nota {
     private Map<Disciplina, Map<Aluno, List<Double>>> notasPorDisciplina;
     private Map<Disciplina, Map<Aluno, Double>> notaRecuperacao;
 
+    private Aluno aluno;
+    private Disciplina disciplina;
+    private double media;
+    private String situacao;
+
+    public Nota(Aluno alunoSelecionado, Disciplina disciplinaSelecionada) {
+        this.aluno = alunoSelecionado;
+        this.disciplina = disciplinaSelecionada;
+    }
+
+    public void setNota(int i, double nota) {
+        if (disciplina == null || aluno == null) {
+            System.out.println("Aluno ou disciplina não definidos!");
+            return;
+        }
+
+        notasPorDisciplina
+            .computeIfAbsent(disciplina, d -> new HashMap<>())
+            .computeIfAbsent(aluno, a -> new ArrayList<>());
+
+        List<Double> notas = notasPorDisciplina.get(disciplina).get(aluno);
+
+        if (notas.size() < 3) {
+            notas.add(nota);
+        } else if (i < notas.size()) {
+            notas.set(i, nota);
+        } else {
+            System.out.println("Número de avaliações excedido!");
+        }
+
+        media = calcularMedia(disciplina, aluno);
+        situacao = verificarSituacao(disciplina, aluno);
+    }
+
+    public String getMedia() {
+        double m = calcularMedia(disciplina, aluno);
+        return String.format("%.1f", m);
+    }
+
+    public String getSituacao() {
+        return verificarSituacao(disciplina, aluno);
+    }
+
     public Nota() {
         notasPorDisciplina = new HashMap<>();
         notaRecuperacao = new HashMap<>();
-    }
-
-
-    public Nota(Aluno alunoSelecionado, Disciplina disciplinaSelecionada) {
-        //TODO Auto-generated constructor stub
     }
 
     public void lancarNota(Disciplina disciplina, Aluno aluno, double nota) {
@@ -87,23 +125,6 @@ public class Nota {
         }
     }
 
-
-    public static void setNota(int i, double n) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setNota'");
-    }
-
-
-	public String getMedia() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getMedia'");
-	}
-
-
-	public String getSituacao() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getSituacao'");
-	}
-
 }
+
 
