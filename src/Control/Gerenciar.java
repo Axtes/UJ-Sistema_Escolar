@@ -222,4 +222,91 @@ public class Gerenciar {
     public void listarTurmas(){
         turmas.forEach(System.out::println);
     }
+
+    public void lancarNotas() {
+    if (alunos.isEmpty() || disciplinas.isEmpty()) {
+        System.out.println("Cadastre alunos e disciplinas antes de lançar notas!");
+        return;
+    }
+
+    System.out.println("=== LANÇAMENTO DE NOTAS ===");
+    listarAlunos();
+    System.out.print("Digite o nome do aluno: ");
+    String nomeAluno = leitor.nextLine();
+
+    Aluno alunoSelecionado = null;
+    for (Aluno a : alunos) {
+        if (a.getNome().equalsIgnoreCase(nomeAluno)) {
+            alunoSelecionado = a;
+            break;
+        }
+    }
+
+    if (alunoSelecionado == null) {
+        System.out.println("Aluno não encontrado!");
+        return;
+    }
+
+    listarDisciplinas();
+    System.out.print("Digite o nome da disciplina: ");
+    String nomeDisciplina = leitor.nextLine();
+
+    Disciplina disciplinaSelecionada = null;
+    for (Disciplina d : disciplinas) {
+        if (d.getNome().equalsIgnoreCase(nomeDisciplina)) {
+            disciplinaSelecionada = d;
+            break;
+        }
+    }
+
+    if (disciplinaSelecionada == null) {
+        System.out.println("Disciplina não encontrada!");
+        return;
+    }
+
+    // Cria ou usa o objeto Nota
+    Nota nota = new Nota(alunoSelecionado, disciplinaSelecionada);
+
+    System.out.println("Digite as notas das 3 avaliações:");
+    for (int i = 0; i < 3; i++) {
+        System.out.print("Nota " + (i + 1) + ": ");
+        double n = leitor.nextDouble();
+        Nota.setNota(i, n);
+    }
+    leitor.nextLine(); // limpa o buffer
+
+    nota.calcularMedia(disciplinaSelecionada, alunoSelecionado);
+    System.out.println("Média inicial: " + nota.getMedia());
+    nota.verificarSituacao(disciplinaSelecionada, alunoSelecionado);
+
+    System.out.println("Situação final de " + alunoSelecionado.getNome() + ": " + nota.getSituacao());
+}
+
+
+
+
+    public void exibirNotasESituacoes(Nota sistemaNotas) {
+    if (alunos.isEmpty() || disciplinas.isEmpty()) {
+        System.out.println("⚠️ Não há alunos ou disciplinas cadastrados!");
+        return;
+    }
+
+    System.out.println("RELATÓRIO DE NOTAS\n");
+
+    for (Disciplina d : disciplinas) {
+        System.out.println(" Disciplina: " + d.getNome());
+
+        for (Aluno a : alunos) {
+            double notaFinal = sistemaNotas.calcularNotaFinal(d, a);
+            String situacao = sistemaNotas.verificarSituacao(d, a);
+
+            System.out.println("Aluno: " + a.getNome());
+            System.out.println("Nota final: " + String.format("%.1f", notaFinal));
+            System.out.println("Situação: " + situacao);
+            System.out.println();
+        }
+    }
+}
+
+
 }

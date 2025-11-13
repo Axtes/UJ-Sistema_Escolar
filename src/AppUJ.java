@@ -16,7 +16,8 @@ public class AppUJ {
                 *                                      *
                 * 1 - Cadastrar                        *
                 * 2 - Listagem                         *
-                * 3 - Sair                             *
+                * 3 - Sistema de Notas                 *
+                * 4 - Sair                             *
                 *                                      *
                 * Digite uma opção:                    *
                 ****************************************
@@ -33,7 +34,8 @@ public class AppUJ {
             switch (opcao) {
                 case 1 -> menus.menuCadastro();
                 case 2 -> menus.menuListagem();
-                case 3 -> System.out.println("Encerrando a aplicação...");
+                case 3 -> menus.menuNotas();
+                case 4 -> System.out.println("Encerrando a aplicação...");
                 default -> System.out.println("Entrada Inválida! Por favor, digite apenas números inteiros entre 1 e 3");
             }
 

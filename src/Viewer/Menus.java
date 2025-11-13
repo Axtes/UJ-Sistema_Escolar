@@ -66,4 +66,28 @@ public class Menus {
             }
         } while (op != 6);
     }
+
+    public void menuNotas() {
+    do {
+        System.out.println("""
+            ****************************************
+            *                                      *
+            * 1 - Lançar notas                     *
+            * 2 - Sair                             *
+            *                                      *
+            * Digite uma opção:                    *
+            ****************************************
+            """);
+
+        op = leitor.nextInt();
+        leitor.nextLine();
+
+        switch (op) {
+            case 1 -> gerenciar.lancarNotas();
+            case 2 -> System.out.println("Voltando ao menu principal...");
+            default -> System.out.println("Opção inválida! Digite 1 ou 2.");
+        }
+    } while (op != 2);
+}
+
 }
