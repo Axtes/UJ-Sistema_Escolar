@@ -59,8 +59,7 @@ public class Professor extends Usuario {
     @Override
     public String toString() {
         return """
-                %s
                 Nome: %s | Título: %s | Matrícula: %s
-                """.formatted(getTipoUsuario(), getNome(), getTitulacao(), getMatricula());
+                """.formatted(getNome(), getTitulacao(), getMatricula());
     }
 }

@@ -33,18 +33,18 @@ public class Nota {
         }
 
         notasPorDisciplina
-            .computeIfAbsent(disciplina, d -> new HashMap<>())
-            .computeIfAbsent(aluno, a -> new ArrayList<>());
+                .computeIfAbsent(disciplina, d -> new HashMap<>())
+                .computeIfAbsent(aluno, a -> new ArrayList<>());
 
         List<Double> notas = notasPorDisciplina.get(disciplina).get(aluno);
 
         if (notas.size() < 3) {
             notas.add(nota);
-        } 
+        }
 
         else if (indice >= 0 && indice < notas.size()) {
             notas.set(indice, nota);
-        } 
+        }
         else {
             System.out.println("Número de avaliações excedido!");
             return;
@@ -70,8 +70,8 @@ public class Nota {
         }
 
         notasPorDisciplina
-            .computeIfAbsent(disciplina, d -> new HashMap<>())
-            .computeIfAbsent(aluno, a -> new ArrayList<>());
+                .computeIfAbsent(disciplina, d -> new HashMap<>())
+                .computeIfAbsent(aluno, a -> new ArrayList<>());
 
         List<Double> notas = notasPorDisciplina.get(disciplina).get(aluno);
         if (notas.size() < 3) {
@@ -91,8 +91,8 @@ public class Nota {
         }
 
         notaRecuperacao
-            .computeIfAbsent(disciplina, d -> new HashMap<>())
-            .put(aluno, nota);
+                .computeIfAbsent(disciplina, d -> new HashMap<>())
+                .put(aluno, nota);
 
         System.out.println("Nota de recuperação " + nota + " lançada para "
                 + aluno.getNome() + " em " + disciplina.getNome());

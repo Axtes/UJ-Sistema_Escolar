@@ -183,6 +183,8 @@ public class Gerenciar {
                         disciplina.getCursos().add(c);
                         curso.getDisciplinas().add(disciplina);
 
+                        disciplina.adicionarHorario();
+
                         System.out.println("A qual semestre é recomendada?: ");
                         int semestre = leitor.nextInt();
                         leitor.nextLine();
@@ -249,34 +251,41 @@ public class Gerenciar {
         }
     }
 
-public void lancarNotas() {
-    Scanner scanner = new Scanner(System.in);
-    Nota notaControl = new Nota();
+    public void lancarNotas() {
+        Scanner scanner = new Scanner(System.in);
+        Nota notaControl = new Nota();
 
+<<<<<<< HEAD
     System.out.println("*** LANÇAMENTO DE NOTAS ***");
+=======
+        System.out.println("***** LANÇAMENTO-DE-NOTAS *****");
+        System.out.print("Digite o nome do aluno: ");
+        alunos.forEach(System.out::println);
+>>>>>>> 257db4d5f792fc00f620f82051530898f54bd9e1
 
-    System.out.print("Digite o nome do aluno: ");
-    String nomeAluno = scanner.nextLine();
+        String nomeAluno = scanner.nextLine();
 
-    Aluno alunoSelecionado = null;
-    for (Aluno a : alunos) {
-        if (a.getNome().equalsIgnoreCase(nomeAluno)) {
-            alunoSelecionado = a;
-            break;
+        Aluno alunoSelecionado = null;
+        for (Aluno a : alunos) {
+            if (a.getNome().equalsIgnoreCase(nomeAluno)) {
+                alunoSelecionado = a;
+                break;
+            }
         }
-    }
 
-    System.out.print("Digite o nome da disciplina: ");
-    String nomeDisciplina = scanner.nextLine();
+        System.out.print("Digite o nome da disciplina: ");
+        disciplinas.forEach(System.out::println);
+        String nomeDisciplina = scanner.nextLine();
 
-    Disciplina disciplinaSelecionada = null;
-    for (Disciplina d : disciplinas) {
-        if (d.getNome().equalsIgnoreCase(nomeDisciplina)) {
-            disciplinaSelecionada = d;
-            break;
+        Disciplina disciplinaSelecionada = null;
+        for (Disciplina d : disciplinas) {
+            if (d.getNome().equalsIgnoreCase(nomeDisciplina)) {
+                disciplinaSelecionada = d;
+                break;
+            }
         }
-    }
 
+<<<<<<< HEAD
     if (alunoSelecionado == null || disciplinaSelecionada == null) {
         System.out.println("Aluno ou disciplina não definidos!");
         return;
@@ -288,35 +297,48 @@ public void lancarNotas() {
         double nota = scanner.nextDouble();
         notaControl.lancarNota(disciplinaSelecionada, alunoSelecionado, nota);
     }
+=======
+        if (alunoSelecionado == null || disciplinaSelecionada == null) {
+            System.out.println("Aluno ou disciplina não definidos!");
+            return;
+        }
+>>>>>>> 257db4d5f792fc00f620f82051530898f54bd9e1
 
-    double media = notaControl.calcularMedia(disciplinaSelecionada, alunoSelecionado);
-    System.out.printf("Média inicial: %.1f%n", media);
-    System.out.println("Situação final de " + alunoSelecionado.getNome() + ": "
-            + notaControl.verificarSituacao(disciplinaSelecionada, alunoSelecionado));
-}
+        List<Double> notas = new ArrayList<>();
+        for (int i = 1; i <= 3; i++) {
+            System.out.print("Nota " + i + ": ");
+            double nota = scanner.nextDouble();
+            notaControl.lancarNota(disciplinaSelecionada, alunoSelecionado, nota);
+        }
+
+        double media = notaControl.calcularMedia(disciplinaSelecionada, alunoSelecionado);
+        System.out.printf("Média inicial: %.1f%n", media);
+        System.out.println("Situação final de " + alunoSelecionado.getNome() + ": "
+                + notaControl.verificarSituacao(disciplinaSelecionada, alunoSelecionado));
+    }
 
     public void exibirNotasESituacoes(Nota sistemaNotas) {
-    if (alunos.isEmpty() || disciplinas.isEmpty()) {
-        System.out.println("Não há alunos ou disciplinas cadastrados!");
-        return;
-    }
+        if (alunos.isEmpty() || disciplinas.isEmpty()) {
+            System.out.println("Não há alunos ou disciplinas cadastrados!");
+            return;
+        }
 
-    System.out.println("RELATÓRIO DE NOTAS\n");
+        System.out.println("RELATÓRIO DE NOTAS\n");
 
-    for (Disciplina d : disciplinas) {
-        System.out.println(" Disciplina: " + d.getNome());
+        for (Disciplina d : disciplinas) {
+            System.out.println(" Disciplina: " + d.getNome());
 
-        for (Aluno a : alunos) {
-            double notaFinal = sistemaNotas.calcularNotaFinal(d, a);
-            String situacao = sistemaNotas.verificarSituacao(d, a);
+            for (Aluno a : alunos) {
+                double notaFinal = sistemaNotas.calcularNotaFinal(d, a);
+                String situacao = sistemaNotas.verificarSituacao(d, a);
 
-            System.out.println("Aluno: " + a.getNome());
-            System.out.println("Nota final: " + String.format("%.1f", notaFinal));
-            System.out.println("Situação: " + situacao);
-            System.out.println();
+                System.out.println("Aluno: " + a.getNome());
+                System.out.println("Nota final: " + String.format("%.1f", notaFinal));
+                System.out.println("Situação: " + situacao);
+                System.out.println();
+            }
         }
     }
-}
 
 
 }

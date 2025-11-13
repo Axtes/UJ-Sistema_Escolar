@@ -60,8 +60,7 @@ public class Aluno extends Usuario {
     @Override
     public String toString() {
         return """
-                %s
                 Nome: %s | Curso: %s | Matrícula: %s
-                """.formatted(getTipoUsuario(), getNome(), getCurso().getNome(), getMatricula());
+                """.formatted(getNome(), getCurso().getNome(), getMatricula());
     }
 }

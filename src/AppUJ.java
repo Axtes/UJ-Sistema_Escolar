@@ -39,7 +39,7 @@ public class AppUJ {
                 default -> System.out.println("Entrada Inválida! Por favor, digite apenas números inteiros entre 1 e 3");
             }
 
-        }while (opcao != 3);
+        }while (opcao != 4);
         leitor.close();
     }
 }

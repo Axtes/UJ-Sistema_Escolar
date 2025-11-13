@@ -13,10 +13,13 @@ public class Turma {
     private List<Aluno> alunos = new ArrayList<>();
     private Integer quantidadeAlunos;
     private final Integer qtdAlunosMax = 50;
+    private StatusDeConclusao statusDeConclusao;
 
     public Turma() {
         this.id = autoId++;
         gerarCodigoTurma();
+        semestre = 1;
+        setStatusDeConclusao(StatusDeConclusao.EM_ANDAMENTO);
     }
 
     public void gerarCodigoTurma() {
@@ -74,10 +77,21 @@ public class Turma {
         return qtdAlunosMax;
     }
 
+    public StatusDeConclusao getStatusDeConclusao() {
+        return statusDeConclusao;
+    }
+
+    public void setStatusDeConclusao(StatusDeConclusao statusDeConclusao) {
+        this.statusDeConclusao = statusDeConclusao;
+    }
+
     @Override
     public String toString() {
         return """
-                Turma: %s | Curso: %s | Semestre: %d | Quantidade de Alunos: %d
-                """.formatted(getCodTurma(), getCurso(), getSemestre(), getQuantidadeAlunos());
+                Turma: %s
+                Curso: %s
+                Semestre: %d
+                Quantidade de Alunos: %d
+                """.formatted(getCodTurma(), getCurso().getNome(), getSemestre(), getQuantidadeAlunos());
     }
 }
