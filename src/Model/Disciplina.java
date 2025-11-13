@@ -84,4 +84,11 @@ public class Disciplina {
     public void setCursos(List<Curso> cursos) {
         this.cursos = cursos;
     }
+
+    @Override
+    public String toString() {
+        return """
+                Nome da disciplina: %s | Código da disciplina: %s
+                """.formatted(getNome(), getCodDisciplina());
+    }
 }
