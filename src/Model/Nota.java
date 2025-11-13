@@ -17,26 +17,37 @@ public class Nota {
     public Nota(Aluno alunoSelecionado, Disciplina disciplinaSelecionada) {
         this.aluno = alunoSelecionado;
         this.disciplina = disciplinaSelecionada;
+        this.notasPorDisciplina = new HashMap<>();
+        this.notaRecuperacao = new HashMap<>();
     }
 
-    public void setNota(int i, double nota) {
+    public Nota() {
+        notasPorDisciplina = new HashMap<>();
+        notaRecuperacao = new HashMap<>();
+    }
+
+    public void setNota(int indice, double nota) {
         if (disciplina == null || aluno == null) {
             System.out.println("Aluno ou disciplina não definidos!");
             return;
         }
 
         notasPorDisciplina
-            .computeIfAbsent(disciplina, d -> new HashMap<>())
-            .computeIfAbsent(aluno, a -> new ArrayList<>());
+                .computeIfAbsent(disciplina, d -> new HashMap<>())
+                .computeIfAbsent(aluno, a -> new ArrayList<>());
 
         List<Double> notas = notasPorDisciplina.get(disciplina).get(aluno);
 
         if (notas.size() < 3) {
             notas.add(nota);
-        } else if (i < notas.size()) {
-            notas.set(i, nota);
-        } else {
+        }
+
+        else if (indice >= 0 && indice < notas.size()) {
+            notas.set(indice, nota);
+        }
+        else {
             System.out.println("Número de avaliações excedido!");
+            return;
         }
 
         media = calcularMedia(disciplina, aluno);
@@ -52,28 +63,39 @@ public class Nota {
         return verificarSituacao(disciplina, aluno);
     }
 
-    public Nota() {
-        notasPorDisciplina = new HashMap<>();
-        notaRecuperacao = new HashMap<>();
-    }
-
     public void lancarNota(Disciplina disciplina, Aluno aluno, double nota) {
+        if (disciplina == null || aluno == null) {
+            System.out.println("Aluno ou disciplina não definidos!");
+            return;
+        }
+
         notasPorDisciplina
-            .computeIfAbsent(disciplina, d -> new HashMap<>())
-            .computeIfAbsent(aluno, a -> new ArrayList<>());
+                .computeIfAbsent(disciplina, d -> new HashMap<>())
+                .computeIfAbsent(aluno, a -> new ArrayList<>());
 
         List<Double> notas = notasPorDisciplina.get(disciplina).get(aluno);
         if (notas.size() < 3) {
             notas.add(nota);
+            System.out.println("Nota " + nota + " lançada com sucesso para "
+                    + aluno.getNome() + " em " + disciplina.getNome());
         } else {
-            System.out.println("Já existem 3 notas lançadas para " + aluno.getNome() + " em " + disciplina.getNome());
+            System.out.println("Já existem 3 notas lançadas para "
+                    + aluno.getNome() + " em " + disciplina.getNome());
         }
     }
 
     public void lancarRecuperacao(Disciplina disciplina, Aluno aluno, double nota) {
+        if (disciplina == null || aluno == null) {
+            System.out.println("Aluno ou disciplina não definidos!");
+            return;
+        }
+
         notaRecuperacao
-            .computeIfAbsent(disciplina, d -> new HashMap<>())
-            .put(aluno, nota);
+                .computeIfAbsent(disciplina, d -> new HashMap<>())
+                .put(aluno, nota);
+
+        System.out.println("Nota de recuperação " + nota + " lançada para "
+                + aluno.getNome() + " em " + disciplina.getNome());
     }
 
     public double calcularMedia(Disciplina disciplina, Aluno aluno) {
@@ -124,7 +146,4 @@ public class Nota {
             }
         }
     }
-
 }
-
-
