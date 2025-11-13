@@ -249,16 +249,14 @@ public class Gerenciar {
         }
     }
 
-    public void lancarNotas() {
-    if (alunos.isEmpty() || disciplinas.isEmpty()) {
-        System.out.println("Cadastre alunos e disciplinas antes de lançar notas!");
-        return;
-    }
+public void lancarNotas() {
+    Scanner scanner = new Scanner(System.in);
+    Nota notaControl = new Nota();
 
-    System.out.println("LANÇAMENTO DE NOTAS");
-    listarAlunos();
+    System.out.println("=== LANÇAMENTO DE NOTAS ===");
+
     System.out.print("Digite o nome do aluno: ");
-    String nomeAluno = leitor.nextLine();
+    String nomeAluno = scanner.nextLine();
 
     Aluno alunoSelecionado = null;
     for (Aluno a : alunos) {
@@ -268,14 +266,8 @@ public class Gerenciar {
         }
     }
 
-    if (alunoSelecionado == null) {
-        System.out.println("Aluno não encontrado!");
-        return;
-    }
-
-    listarDisciplinas();
     System.out.print("Digite o nome da disciplina: ");
-    String nomeDisciplina = leitor.nextLine();
+    String nomeDisciplina = scanner.nextLine();
 
     Disciplina disciplinaSelecionada = null;
     for (Disciplina d : disciplinas) {
@@ -285,27 +277,22 @@ public class Gerenciar {
         }
     }
 
-    if (disciplinaSelecionada == null) {
-        System.out.println("Disciplina não encontrada!");
+    if (alunoSelecionado == null || disciplinaSelecionada == null) {
+        System.out.println("Aluno ou disciplina não definidos!");
         return;
     }
-
-    Nota nota = new Nota(alunoSelecionado, disciplinaSelecionada);
-
-    System.out.println("Digite as notas das 3 avaliações:");
-    for (int i = 0; i < 3; i++) {
-        System.out.print("Nota " + (i + 1) + ": ");
-        double n = leitor.nextDouble();
-        Nota nota2 = new Nota();
-        nota2.setNota(i, n);
+    
+    List<Double> notas = new ArrayList<>();
+    for (int i = 1; i <= 3; i++) {
+        System.out.print("Nota " + i + ": ");
+        double nota = scanner.nextDouble();
+        notaControl.lancarNota(disciplinaSelecionada, alunoSelecionado, nota);
     }
-    leitor.nextLine();
 
-    nota.calcularMedia(disciplinaSelecionada, alunoSelecionado);
-    System.out.println("Média inicial: " + nota.getMedia());
-    nota.verificarSituacao(disciplinaSelecionada, alunoSelecionado);
-
-    System.out.println("Situação final de " + alunoSelecionado.getNome() + ": " + nota.getSituacao());
+    double media = notaControl.calcularMedia(disciplinaSelecionada, alunoSelecionado);
+    System.out.printf("Média inicial: %.1f%n", media);
+    System.out.println("Situação final de " + alunoSelecionado.getNome() + ": "
+            + notaControl.verificarSituacao(disciplinaSelecionada, alunoSelecionado));
 }
 
     public void exibirNotasESituacoes(Nota sistemaNotas) {
